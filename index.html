@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    
+    <h1>Codere Hash Generator - Please input a list of usernames</h1>
+    
+    <div class="father">
+    <textarea id="input_ta"></textarea>
+    <h6>*Duplicate username inputs will be removed from the table below</h6>
+</div>
+    <div class= "btn_container">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <filter id="gooey">
+                <!-- in="sourceGraphic" -->
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="highContrastGraphic" />
+                <feComposite in="SourceGraphic" in2="highContrastGraphic" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+
+    <button onclick="calculate_hash()" id="gooey-button">
+        Calculate Hash
+        <span class="bubbles">
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+        </span>
+    </button>
+
+</div>
+<div>
+    <input id="copy_btn" type="button" value="Select all & Copy" style="display: none;" >
+    <div class="wrapper"></div>
+</div>
+
+<script src="hash.js"></script>
+
+</body>
+</html>
