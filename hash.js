@@ -1,4 +1,4 @@
-
+// ----------------- SHA256 ---------------------= \\
 
 function SHA256(s) {
 
@@ -139,37 +139,79 @@ function SHA256(s) {
     return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
 
 }
+const myMap = new Map(); 
+
+// ----------------- Select Users From Table ---------------------= \\
+var keyBtn = document.querySelector('#key_btn');
+keyBtn.addEventListener('click', function(){
+        var keys = document.querySelectorAll('th');
+        var range = document.createRange();      
+        ficTable('key');
+        var sel = window.getSelection();
+
+        sel.removeAllRanges();
+        sel.addRange(range);
+        
+        window.getSelection().addRange(range);
+         
+        document.execCommand('copy');
+    
+}, false)
+
+// ----------------- Select Hashes From Table ---------------------= \\
+    var valueBtn = document.querySelector('#val_btn');
+    valueBtn.addEventListener('click', function(){
+    var keys = document.querySelectorAll('th');
+    var range = document.createRange();      
+    ficTable('value');
+    var sel = window.getSelection();
+
+    sel.removeAllRanges();
+    sel.addRange(range);
+    
+    window.getSelection().addRange(range);
+     
+    document.execCommand('copy');
+
+}, false)
+
+// ----------------- Create Full Table ---------------------= \\
+    var full_btn = document.getElementById('full_btn');
+    full_btn.addEventListener('click', function(){
+    addTableDyn(myMap);
+    }, false);
 
 
-// --------------------------------------= \\
-
+// ----------------- Select All Table ---------------------= \\
 
 var copyBtn = document.querySelector('#copy_btn');
 copyBtn.addEventListener('click', function () {
 
   var urlField = document.querySelector('tbody');
-  // create a Range object
-
   var range = document.createRange();  
-  // set the Node to select the "range"
-
   var sel = window.getSelection();
-sel.removeAllRanges();
-sel.addRange(range);
+  sel.removeAllRanges();
+  sel.addRange(range);
+  
   range.selectNode(urlField);
-  // add the Range to the set of window selections
   window.getSelection().addRange(range);
    
-  // execute 'copy', can't 'cut' in this case
   document.execCommand('copy');
 }, false);
 
-function calculate_hash(){
-    document.getElementById('copy_btn').style.display = 'block'
 
+
+
+
+// ----------------- Calculate Hash ---------------------= \\
+
+
+function calculate_hash(){
+    document.getElementsByClassName('btns_container')[0].style.display = 'block'
+
+    
     var inputTextArea = document.getElementById('input_ta');
     var users = inputTextArea.value.split('\n');
-    var myMap = new Map();
 
     users.map((user)=> {
     if(user != '' && user != '\n')
@@ -179,6 +221,7 @@ function calculate_hash(){
     addTableDyn(myMap);
 }
 
+// ----------------- Is a Variable Iterable? ---------------------= \\
 
 
 function isIterable(obj) {
@@ -188,6 +231,41 @@ function isIterable(obj) {
     }
     return typeof obj[Symbol.iterator] === 'function';
   }
+
+// ----------------- Fictive Table ---------------------= \\
+function ficTable(term){
+    var div_element = document.getElementsByClassName("wrapper")[0];
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+    var str = term=='key' ? 'key' : 'value';
+    console.log(str);
+
+    var row = document.createElement("tr");
+    row.setAttribute("class", "rows")
+
+      myMap.forEach((value, key) => {
+          var row = document.createElement("tr");
+          row.setAttribute("class", "rows")
+              var cell = document.createElement("th");
+              var text = document.createElement('h3');
+
+                text.innerHTML = eval(str);
+                cell.appendChild(text);
+              cell.setAttribute("class", 'cell')
+              cell.style.textAlign = "center";
+              row.appendChild(cell);
+          
+          tblBody.appendChild(row);
+      });
+      
+    tbl.appendChild(tblBody);
+    div_element.innerHTML= "";
+    div_element.appendChild(tbl);
+    tbl.setAttribute("border", "1");
+}
+
+
+// ----------------- Create Table Dynamiclly ---------------------= \\
 
 function addTableDyn(users){
      var div_element = document.getElementsByClassName("wrapper")[0];
@@ -233,12 +311,15 @@ function addTableDyn(users){
                 switch (j){
                     case 0:
                         str = key
+                        cell.setAttribute('class', 'key');
                         break;
                     case 1:
                         str = value
+                        cell.setAttribute('class', 'val');
                         break;
                     case 2:
                         str = new Date().toLocaleDateString();
+                        cell.setAttribute('class', 'date');
                         break;
                                 
                 }
@@ -247,10 +328,6 @@ function addTableDyn(users){
                 
                 cell.setAttribute("ClassName", 'cell')
 
-                // cell.setAttribute('rowspan', 0)
-
-                // cell.style.width = "1vw";
-                // cell.style.height = ".5vw";
                 cell.style.textAlign = "center";
                 row.appendChild(cell);
             }
@@ -261,7 +338,6 @@ function addTableDyn(users){
       div_element.innerHTML= "";
       div_element.appendChild(tbl);
       tbl.setAttribute("border", "1");
-        
     }
 
 // const xhttp = new XMLHttpRequest();

@@ -9,8 +9,8 @@ h1{
     color: white;
 }
 
-/* Duplicate username inputs will be removed from the table below */
 /* Inputs */
+
 
 
 .father{
@@ -27,11 +27,29 @@ h6{
     font-size: .85vw;
 }
 
+.btns{
+  display: flex;
+  margin: auto;
+  margin-left: 34.2vw;
+  margin-bottom: .3vw;
+}
+
+.btns input{
+  width: 12%;
+  height: 2vw;
+}
+
+.btns h2{
+  color: white;
+  margin-right: .5vw;
+  margin-top: .3vw;
+
+}
+
 #copy_btn{
-    margin-left: 46vw;
-    width: 9.2vw;
-    height: 1.5vw;
-    margin-bottom: .3vw;
+  display: block;
+  margin: auto;
+  height: 3vw;
 }
 
 #input_ta{
